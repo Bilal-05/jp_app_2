@@ -30,7 +30,7 @@ class SplashView extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    'JP APP',
+                    'JP Capital Services',
                     style: Style.semiBold35ptb,
                   ),
                   20.verticalSpace,
