@@ -2,10 +2,10 @@
 
 import 'dart:developer';
 
-// import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-// import 'package:flutter_email_sender/flutter_email_sender.dart';
-// import 'package:intl/intl.dart';
+import 'package:flutter_email_sender/flutter_email_sender.dart';
+import 'package:intl/intl.dart';
 import 'package:jp_app/app/app.locator.dart';
 import 'package:jp_app/app/app.router.dart';
 // import 'package:jp_app/services/google_service.dart';
@@ -235,7 +235,7 @@ class AppointmentVM extends BaseViewModel {
 
   navigateBackToMain() async {
     if (formKey.currentState!.validate()) {
-      // await sendEmail();
+      await sendEmail();
       // sendEmail();
       await setFalse();
       navigationService.replaceWithMainMenuView();
@@ -255,39 +255,44 @@ class AppointmentVM extends BaseViewModel {
     log('erased');
   }
 
-  // Future<void> sendEmail() async {
-  //   final user = FirebaseAuth.instance.currentUser;
-  //   final Email email = Email(
-  //     body:
-  //         'Hey JP, \n\nMy name is ${nameController.text}. \n\nI want to book an appointment for ${service!} on ${DateFormat('dd-MM-yyyy').format(selectedDate!)}. \n\nTiming will be ${timing[timeIndex]}. \n\nAdress:\n${addressController.text}. \n\nDescription:\n${descriptionController.text} \n\nMy phone number is ${phoneController.text} \n\nRegards, \n${nameController.text} \n${user!.email}',
-  //     subject: '${service!} required',
-  //     recipients: ["mamudrama@gmail.com"],
-  //     // attachmentPaths: attachments,
-  //     // isHTML: isHTML,
-  //   );
+  Future<void> sendEmail() async {
+    final user = FirebaseAuth.instance.currentUser;
+    final Email email = Email(
+      body:
+          'Hey JP, \n\nMy name is ${nameController.text}. \n\nI want to book an appointment for ${service!} on ${DateFormat('dd-MM-yyyy').format(selectedDate!)}. \n\nTiming will be ${timing[timeIndex]}. \n\nAdress:\n${addressController.text}. \n\nDescription:\n${descriptionController.text} \n\nMy phone number is ${phoneController.text} \n\nRegards, \n${nameController.text} \n${user!.email}',
+      subject: '${service!} required',
+      recipients: ["mamudrama@gmail.com"],
+      // attachmentPaths: attachments,
+      // isHTML: isHTML,
+    );
 
-  //   String platformResponse;
+    String platformResponse;
 
-  //   try {
-  //     await FlutterEmailSender.send(email);
-  //     platformResponse = 'success';
-  //   } catch (error) {
-  //     // print(error);
-  //     platformResponse = error.toString();
-  //     SnackbarService().showSnackbar(
-  //       message: error.toString(),
-  //       title: 'Error',
-  //       duration: const Duration(seconds: 1),
-  //     );
-  //     log(error.toString());
-  //   }
+    try {
+      await FlutterEmailSender.send(email);
+      platformResponse = 'success';
+    } catch (error) {
+      // print(error);
+      platformResponse = error.toString();
+      SnackbarService().showSnackbar(
+        message: error.toString(),
+        title: 'Error',
+        duration: const Duration(seconds: 1),
+      );
+      log(error.toString());
+    }
 
-  //   SnackbarService().showSnackbar(
-  //     message: platformResponse,
-  //     title: 'Success',
-  //     duration: const Duration(seconds: 1),
-  //   );
-  // }
+    SnackbarService().showSnackbar(
+      message: platformResponse,
+      title: 'Success',
+      duration: const Duration(seconds: 1),
+    );
+  }
+
+  navigateToEstimation() {
+    setFalse();
+    navigationService.replaceWithEstimationView(serviceName: service!);
+  }
 
   // Future onSubmit() async {
   //   log('in');

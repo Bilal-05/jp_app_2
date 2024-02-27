@@ -5,8 +5,9 @@ import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+// import 'package:google_sign_in/google_sign_in.dart';
 // import 'package:flutter/services.dart';
-// import 'package:flutter_email_sender/flutter_email_sender.dart';
+import 'package:flutter_email_sender/flutter_email_sender.dart';
 // import 'package:flutter_mailer/flutter_mailer.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:jp_app/app/app.locator.dart';
@@ -87,7 +88,7 @@ class EstimationVM extends BaseViewModel {
 
   navigateToAppointmentView() async {
     if (formKey.currentState!.validate()) {
-      // await sendFlutterEmail();
+      await sendFlutterEmail();
       navigationService.navigateToAppointmentView(service: service!);
     } else {
       SnackbarService().showSnackbar(
@@ -97,41 +98,41 @@ class EstimationVM extends BaseViewModel {
     }
   }
 
-  // Future<void> sendFlutterEmail() async {
-  //   final Email email = Email(
-  //     body:
-  //         'Hey JP, \n${descriptionController.text} \n\nRegards, \n${nameController.text} \n${emailController.text}',
-  //     subject: '${serviceController.text} required',
-  //     recipients: ["mamudrama@gmail.com"],
-  //     attachmentPaths: attachments,
-  //     // isHTML: isHTML,
-  //   );
+  Future<void> sendFlutterEmail() async {
+    final Email email = Email(
+      body:
+          'Hey JP, \n${descriptionController.text} \n\nRegards, \n${nameController.text} \n${emailController.text}',
+      subject: '${serviceController.text} required',
+      recipients: ["mamudrama@gmail.com"],
+      attachmentPaths: attachments,
+      // isHTML: isHTML,
+    );
 
-  //   String platformResponse;
+    String platformResponse;
 
-  //   try {
-  //     await FlutterEmailSender.send(email);
-  //     // FlutterEmailSender.s
-  //     await setValues();
-  //     platformResponse = 'success';
-  //     navigationService.replaceWithAppointmentView(service: service!);
-  //   } catch (error) {
-  //     print(error);
-  //     platformResponse = error.toString();
-  //     SnackbarService().showSnackbar(
-  //       message: error.toString(),
-  //       title: 'Error',
-  //       duration: const Duration(seconds: 1),
-  //     );
-  //     log(error.toString());
-  //   }
+    try {
+      await FlutterEmailSender.send(email);
+      // FlutterEmailSender.s
+      await setValues();
+      platformResponse = 'success';
+      navigationService.replaceWithAppointmentView(service: service!);
+    } catch (error) {
+      print(error);
+      platformResponse = error.toString();
+      SnackbarService().showSnackbar(
+        message: error.toString(),
+        title: 'Error',
+        duration: const Duration(seconds: 1),
+      );
+      log(error.toString());
+    }
 
-  //   SnackbarService().showSnackbar(
-  //     message: platformResponse,
-  //     title: 'Success',
-  //     duration: const Duration(seconds: 1),
-  //   );
-  // }
+    SnackbarService().showSnackbar(
+      message: platformResponse,
+      title: 'Success',
+      duration: const Duration(seconds: 1),
+    );
+  }
 
   // Future onSubmit() async {
   //   log('in');

@@ -45,13 +45,14 @@ class ForgetView extends StatelessWidget {
                       ),
                       0.03.sh.verticalSpace,
                       SizedBox(
-                          width: 0.75.sw,
-                          child: Center(
-                            child: Lottie.asset(
-                              vModel.forgot,
-                              width: 0.65.sw,
-                            ),
-                          )),
+                        width: 0.75.sw,
+                        child: Center(
+                          child: Lottie.asset(
+                            vModel.forgot,
+                            width: 0.65.sw,
+                          ),
+                        ),
+                      ),
                       0.03.sh.verticalSpace,
                       SizedBox(
                         child: Form(

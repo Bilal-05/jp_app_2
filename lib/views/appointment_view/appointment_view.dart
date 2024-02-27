@@ -309,7 +309,6 @@ class AppointmentView extends StatelessWidget {
                   // // const Spacer(),
                   30.verticalSpace,
                   Container(
-                    margin: EdgeInsets.only(bottom: 0.03.sh),
                     child: InkWell(
                       onTap: () {
                         viewModel.navigateBackToMain();
@@ -321,6 +320,21 @@ class AppointmentView extends StatelessWidget {
                       ),
                     ),
                   ),
+                  10.verticalSpace,
+                  Center(
+                    child: Container(
+                      margin: EdgeInsets.only(bottom: 0.03.sh),
+                      child: TextButton(
+                        onPressed: () {
+                          viewModel.navigateToEstimation();
+                        },
+                        child: Text(
+                          'I haven\'t send any mail!.',
+                          style: Style.medium14ptb,
+                        ),
+                      ),
+                    ),
+                  )
                 ],
               ),
             ),
