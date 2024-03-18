@@ -201,7 +201,7 @@ class AppointmentVM extends BaseViewModel {
     service = serviceName;
     for (int i = 0; i < services.service.length; i++) {
       if (services.service[i]['serviceName'] == service) {
-        imageUrl = services.service[i]['imageUrl'];
+        imageUrl = services.service[i]['icon'];
         notifyListeners();
       }
     }
